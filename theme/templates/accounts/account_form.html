@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load i18n mezzanine_tags staticfiles %}
+
+{% block meta_title %}{{ title }}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
+{% block body_id %}account{% endblock %}
+{% block main_section_class %}account-background{% endblock %}
+
+{% block breadcrumb_menu %}
+{{ block.super }}
+<li>{{ title }}</li>
+{% endblock %}
+
+{% block main %}
+
+{% errors_for form %}
+
+<div class="col-md-6 text-center clearfix" style="height:800px; top:25%;">
+<br /> <br /> <br /> <br /> <br />
+    <img src="{% static 'assets/img/afa-logo-light.png' %}">
+    <h3>Connecting Africa's grassroots Football.</h3>
+</div>
+<div class="col-md-6 account-form clearfix" style="height:800px;">
+<div class="col-sm-8 col-sm-offset-2" style="top:30%;">
+    <form method="post"{% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
+        <fieldset>
+        <legend>{{ title }}</legend>
+        {% fields_for form %}
+          {% block account_form_actions %}
+          <input class="btn btn-primary btn-lg flat-color pull-right" type="submit" value="{{ title }}">
+          {% endblock %}
+        </fieldset>
+    </form>
+    {% block extra_info %}{% endblock %}
+</div>
+</div>
+{% endblock %}
